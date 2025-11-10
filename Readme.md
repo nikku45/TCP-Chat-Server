@@ -59,8 +59,16 @@ Chat server listening on port 5000'
 If telnet or nc isn’t available, use the provided client.js file.
 
 Run two clients in separate terminals:
+
+If telnet or nc isn’t available, use the provided client.js file.
+
 ```bash
 node client.js
+```
+Othewise
+
+```bash
+nc localhost 4000
 ```
 
 
