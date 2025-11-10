@@ -1,25 +1,23 @@
-// server.js
-// Simple TCP chat server using Node's standard 'net' module.
-// Supports: LOGIN, MSG (broadcast), WHO, DM, PING, idle timeout (60s), and clean disconnect handling.
+
 
 const net = require('net');
 
-// PORT: default 4000, can override with PORT env var or CLI arg (node server.js 5000)
+
 const CLI_PORT = process.argv[2];
 const PORT = CLI_PORT || process.env.PORT || 4000;
 
-// Map of username -> client object { socket, timeoutRef }
+
 const clients = new Map();
 
-// Idle timeout in milliseconds (60s)
+
 const IDLE_TIMEOUT_MS = 60 * 1000;
 
-// Helper: safely send a line to a socket (adds newline)
+
 function sendLine(socket, text) {
   try {
     socket.write(text + '\n');
   } catch (e) {
-    // ignore write errors — socket may be gone
+  
   }
 }
 
@@ -111,7 +109,7 @@ function handleLine(socket, line) {
     sendLine(socket, 'OK');
     console.log(`${username} logged in.`);
 
-    // Notify others that this user joined (optional; not in required spec, but useful)
+    // Notify others that this user joined 
     broadcastInfo(`${username} connected`);
 
     // Start idle timer for this user
